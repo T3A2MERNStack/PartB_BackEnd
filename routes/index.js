@@ -1,34 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose')
+const RecipeModel = require('./recipes')
 
-const Schema = mongoose.Schema
-
-const RecipeSchema = new Schema({
-    name: {
-      type: String,
-      required: true
-    },
-    duration: {
-      type: String,
-      required: false
-    }
-})
-RecipeModel = mongoose.model("recipe", RecipeSchema)
-
-mongoose.connect(
-  "mongodb+srv://team-girls:ETsiWzgdCynyWMzZ@cluster0.zfqjd.mongodb.net/eco-recipe?retryWrites=true&w=majority",
-  { useNewUrlParser: true,
-  useUnifiedTopology: true },
-  error => {
-    if(error){
-      console.log("there was an error")
-      throw error
-    } else {
-      console.log("we are connected")
-    }
-  }
-)
 
 /* GET home page. */
 router.get('/', (req, res) => {

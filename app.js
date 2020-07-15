@@ -5,12 +5,24 @@ var logger = require('morgan');
 const mongoose = require('mongoose')
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var listsRouter = require('./routes/lists');
 
 var app = express();
 
-
-
+mongoose.connect(
+    "mongodb+srv://team-girls:ETsiWzgdCynyWMzZ@cluster0.zfqjd.mongodb.net/eco-recipe?retryWrites=true&w=majority",
+    { useNewUrlParser: true,
+    useUnifiedTopology: true },
+    error => {
+      if(error){
+        console.log("there was an error")
+        throw error
+      } else {
+        console.log("we are connected")
+      }
+    }
+)
+  
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -18,8 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
+app.use('/lists', listsRouter);
 
 
 module.exports = app;
