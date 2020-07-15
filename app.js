@@ -3,11 +3,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var listsRouter = require('./routes/lists');
 
 var app = express();
+app.use(cors())
 
 mongoose.connect(
     "mongodb+srv://team-girls:ETsiWzgdCynyWMzZ@cluster0.zfqjd.mongodb.net/eco-recipe?retryWrites=true&w=majority",
