@@ -23,6 +23,12 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.delete('/', async (req, res) => {
+  RecipeModel.deleteOne({id: req.params.id})
+    .then(doc => res.send(doc))
+    .catch(err => res.status(404).send(err))
+})
+
 
 
 
