@@ -19,9 +19,11 @@ router.post('/', async (req, res) => {
     await recipe.save();
     res.send(recipe);
   } catch (err) {
-    res.status(500).send(err);
+    res.status(404).send(err);
   }
 })
+
+
 
 
 module.exports = router;
