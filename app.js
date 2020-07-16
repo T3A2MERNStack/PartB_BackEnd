@@ -7,12 +7,14 @@ const cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var listsRouter = require('./routes/lists');
+var usersRouter = require('./routes/users');
 
 var app = express();
 app.use(cors())
+const db = require('./config/keys').MongoId
 
 mongoose.connect(
-    "mongodb+srv://team-girls:ETsiWzgdCynyWMzZ@cluster0.zfqjd.mongodb.net/eco-recipe?retryWrites=true&w=majority",
+    db,
     { useNewUrlParser: true,
     useUnifiedTopology: true },
     error => {
@@ -33,6 +35,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/lists', listsRouter);
-
+app.use('/users', usersRouter);
 
 module.exports = app;
