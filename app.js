@@ -2,24 +2,26 @@ if (process.env.NODE_ENV !== 'production'){
   require('dotenv').config()
 }
 
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const mongoose = require('mongoose')
 const cors = require('cors')
 const passport = require('passport')
-const initializePassport = require('./passport-config')
-const flash = require('express-flash')
 const session = require('express-session')
+const flash = require('express-flash')
 
-var indexRouter = require('./routes/index');
-var listsRouter = require('./routes/lists');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const listsRouter = require('./routes/lists');
+const usersRouter = require('./routes/users');
 
-var app = express();
+const app = express();
 app.use(cors())
+
+require('./passport-config')(passport)
 const db = require('./config/keys').MongoId
+
 
 mongoose.connect(
     db,
@@ -35,10 +37,6 @@ mongoose.connect(
     }
 )
 
-const UserModel = require('./models/user')
-initializePassport(passport, e => {
-    UserModel.findOne({ email: e })
-})
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -47,17 +45,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
+  secret: 'process.env.SESSION_SECRET',
+  resave: true,
   saveUninitialized: false
-}
-))
-
+}))
 app.use(passport.initialize())
 app.use(passport.session())
 
 app.use('/', indexRouter);
 app.use('/lists', listsRouter);
 app.use('/users', usersRouter);
+
+
 
 module.exports = app;

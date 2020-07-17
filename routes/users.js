@@ -3,22 +3,24 @@ const router = express.Router();
 const UserModel = require('../models/user')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
-// const { route } = require('.')
-
+const { ensureAuthenticated } = require('../config/auth')
 router.get('/', (req, res) =>
-    res.send(200)
+    res.send("log in success")
 )
 
 router.get('/login', (req, res) =>
     res.send(200)
 )
 
-router.post('/login',
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
+    })(req, res, next)
+})
 
-(req, res) => console.log('testing')
-)
-
-router.get('/register', (req, res) => {
+router.get('/register',  ensureAuthenticated, (req, res) => {
     console.log('testing')
     res.send('test')
 })
@@ -34,6 +36,13 @@ router.post('/register', async (req, res) => {
     } catch (err) {
         res.status(404).send(err)
     }
+})
+
+
+router.get('/logout', (req, res) => {
+    req.logout()
+    console.log('logged out')
+    res.send(202)
 })
 
 module.exports = router;

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const RecipeModel = require('./recipes')
 const { route } = require('.')
+const { ensureAuthenticated } = require('../config/auth')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -28,7 +29,6 @@ router.delete('/', async (req, res) => {
     .then(doc => res.send(doc))
     .catch(err => res.status(404).send(err))
 })
-
 
 
 
