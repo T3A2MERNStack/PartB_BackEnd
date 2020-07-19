@@ -8,7 +8,7 @@ module.exports = function(passport){
     passport.use(
         // Match user
         new LocalStrategy({usernameField: 'email'}, (email, password, done) => {
-            UserModel.findOne({email: email})
+            UserModel.findOne({ email: email })
                 .then(user => {
                     if(!user){
                         return done(null, false, {message: "email is not registered"})
@@ -24,12 +24,16 @@ module.exports = function(passport){
                         }
                     })
                 })
-                .catch(err => console.log(err))
+                .catch(err => done(err))
         })
     )
     passport.serializeUser((user, done)=> done(null, user.id))
-    passport.deserializeUser((id, done)=> {
-        return done(null, getUserById(id))
+    passport.deserializeUser((id, done) => {
+        UserModel.findById(id)
+            .then(user => {
+                done(null, user)
+            })
+            .catch(err => done(err))
     })
 }
 

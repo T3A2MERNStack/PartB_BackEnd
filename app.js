@@ -19,13 +19,12 @@ const usersRouter = require('./routes/users');
 const app = express();
 app.use(cors())
 
-require('./passport-config')(passport)
 const db = require('./config/keys').MongoId
 
 
 mongoose.connect(
-    db,
-    { useNewUrlParser: true,
+  db,
+  { useNewUrlParser: true,
     useUnifiedTopology: true },
     error => {
       if(error){
@@ -35,26 +34,30 @@ mongoose.connect(
         console.log("we are connected")
       }
     }
-)
+    )
+    
+    
+  app.use(logger('dev'));
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: false }));
+  app.use(cookieParser());
+  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(flash());
+  app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true
+  }))
+
+  require('./passport-config')(passport)
+
+  app.use(passport.initialize())
+  app.use(passport.session())
 
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(flash());
-app.use(session({
-  secret: 'process.env.SESSION_SECRET',
-  resave: true,
-  saveUninitialized: false
-}))
-app.use(passport.initialize())
-app.use(passport.session())
-
-app.use('/', indexRouter);
-app.use('/lists', listsRouter);
-app.use('/users', usersRouter);
+  app.use('/', indexRouter);
+  app.use('/lists', listsRouter);
+  app.use('/users', usersRouter);
 
 
 

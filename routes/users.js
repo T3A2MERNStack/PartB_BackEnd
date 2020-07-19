@@ -4,6 +4,9 @@ const UserModel = require('../models/user')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const { ensureAuthenticated } = require('../config/auth')
+const { route } = require('.')
+
+
 router.get('/', (req, res) =>
     res.send("log in success")
 )
@@ -12,11 +15,24 @@ router.get('/login', (req, res) =>
     res.send(200)
 )
 
-router.post('/login', (req, res, next) => {
-    passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true
+router.get('/login/failure', (req, res) => {
+    res.status(404).send(err)
+})
+
+router.post('/login', function(req, res, next){
+    passport.authenticate('local', function(err, user, info){
+        if(err){
+            return next(err)
+        }
+        if (! user) {
+            return res.status(404).send({ error : info.message });
+        }
+        req.login(user, function(err){
+            if(err){
+              return next(err);
+            }
+            return res.send({ success : true, message : 'authentication succeeded' });        
+        });
     })(req, res, next)
 })
 
