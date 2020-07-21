@@ -10,12 +10,15 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const passport = require('passport')
 const session = require('express-session')
+const bodyParser = require('body-parser')
 const MongoStore = require('connect-mongo')(session)
-const UserModel = require('./models/user')
+const User = require('./models/user')
 
 const indexRouter = require('./routes/index');
 const listsRouter = require('./routes/lists');
 const usersRouter = require('./routes/users');
+
+require('./passport-config')
 
 const app = express();
 
@@ -38,38 +41,36 @@ mongoose.connect(
   
 //Middleware 
   
-app.use(cors())
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(cors({
+  // people coming from "http://localhost:3000"
+  origin: "http://localhost:3000",
+  // allow client to send credentials like cookies and headers
+  credentials: true
+}))
 
-const initializePassport = require('./passport-config')
-initializePassport(passport)
+// app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use(session({
-  secret: 'secret',
+  secret: "secret",
   resave: true,
-  saveUninitialized: false,
-  store: new MongoStore(
-    {mongooseConnection: mongoose.connection,
-    collection: 'sessions'}
-  ),
-  cookie: {
-      maxAge: 2*2*2*2
-  }
-  })
-)
+  saveUninitialized: true,
+  // new MongoStore needs a connection, we have an existing connection so we re-use that
+  store: new MongoStore({mongooseConnection: mongoose.connection}),
+}))
+    
+app.use(cookieParser("secret"))
 
-app.use(cookieParser())
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.use('/users', usersRouter);
 app.use('/', indexRouter);
 app.use('/lists', listsRouter);
-app.use('/users', usersRouter);
 
 
 
