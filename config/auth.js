@@ -1,8 +1,9 @@
-module.exports = 
-    function ensureAuthenticated(req, res, next){
+module.exports = {
+   ensureAuthenticated: function(req, res, next) {
         if(req.isAuthenticated()){
             return next()
-        } else {
-            return res.send(404)
-        }
+        } 
+        res.send(404)
     }
+
+}

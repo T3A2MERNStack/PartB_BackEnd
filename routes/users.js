@@ -3,16 +3,8 @@ const router = express.Router();
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
 const passport = require('passport')
-// const ensureAuthenticated = require('../config/auth')
-// const checkNotAuthenticated = require('../config/loggedIn')
-// const { route } = require('.')
+const {ensureAuthenticated } = require('../config/auth')
 
-
-// router.get('/', (req, res) =>{
-//     // console.log(req.session)
-//     console.log(req.user)
-//     res.send(req.user)
-// })
 
 router.get('/me', (req, res) =>{
     console.log(req.user)
@@ -20,12 +12,6 @@ router.get('/me', (req, res) =>{
 })
 
 router.get('/login', (req, res) =>{
-    // console.log(req)
-    // if(req.session.passport){
-    //     return res.status(404).send({ error: "not logged in"})
-    // }
-    // // console.log(req.session.passport.user)
-    // next();
     res.send(200)
 })
 
@@ -43,7 +29,7 @@ router.post('/login', function(req, res, next){
                 res.send(user)
             })
         }
-        // req.login(user, function(err){
+        // req.login(user, function(err){`as
         //     if(err){
         //       return next(err);
         //     }
@@ -63,7 +49,7 @@ router.post('/register',(req, res) => {
     // } catch (err) {
     //     res.status(404).send(err)
     // }
-    User.register(new User({username: req.body.username, displayName: req.body.username}), req.body.password, function(err, user){
+    User.register(new User({username: req.body.username, email: req.body.email}), req.body.password, function(err, user){
         if (err) {
             console.log(err)
             // return that error sent in the response object
