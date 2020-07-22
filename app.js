@@ -14,11 +14,11 @@ const bodyParser = require('body-parser')
 const MongoStore = require('connect-mongo')(session)
 const User = require('./models/user')
 
+require('./passport-config')
 const indexRouter = require('./routes/index');
 const listsRouter = require('./routes/lists');
 const usersRouter = require('./routes/users');
 
-require('./passport-config')
 
 const app = express();
 
@@ -53,14 +53,19 @@ app.use(cors({
 }))
 
 // app.use(express.static(path.join(__dirname, 'public')));
+// app.user((res,req)
 
+function cookieChecker(req, res, next){
+  console.log(req.cookie)
+  next()
+}
 
 app.use(session({
   secret: "secret",
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
   // new MongoStore needs a connection, we have an existing connection so we re-use that
-  store: new MongoStore({mongooseConnection: mongoose.connection}),
+  store: new MongoStore({mongooseConnection: mongoose.connection})
 }))
     
 app.use(cookieParser("secret"))
@@ -68,7 +73,7 @@ app.use(cookieParser("secret"))
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/users', usersRouter);
+app.use('/users', cookieChecker, usersRouter);
 app.use('/', indexRouter);
 app.use('/lists', listsRouter);
 

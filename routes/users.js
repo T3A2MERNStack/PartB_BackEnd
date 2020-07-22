@@ -53,11 +53,6 @@ router.post('/login', function(req, res, next){
     })(req, res, next)
 })
 
-router.get('/register', (req, res) => {
-    console.log('hello')
-    res.send('test')
-})
-
 router.post('/register',(req, res) => {
     // try {
     //     const hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -76,6 +71,7 @@ router.post('/register',(req, res) => {
         } else {
             // if it works, authenticate the user, attaches session cookie to response automatically
             passport.authenticate('local')(req, res, function() {
+                console.log(req.user)
                 return res.send(user)
             })
         }

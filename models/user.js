@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
     },
     displayName: {
         type: String
-    },
+    }
 })
 
 UserSchema.plugin(passportLocalMongoose)
