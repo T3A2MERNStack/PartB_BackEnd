@@ -4,12 +4,17 @@ const RecipesSchema = new mongoose.Schema({
     name: {
       type: String,
       required: true,
-      unique: true
+      // unique: true
     },
     duration: {
       type: String,
       required: false
+    },
+    category: {
+      type: String,
+      required: true
     }
+    
 })
 
  
