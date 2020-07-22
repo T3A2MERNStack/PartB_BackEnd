@@ -8,10 +8,15 @@ const UserSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        unique: true
+        unique: true,
+        required: true
     }
 })
 
-UserSchema.plugin(passportLocalMongoose)
+
+UserSchema.plugin(passportLocalMongoose,{ 
+    usernameUnique: true,
+    emailUnique: true  
+    })
 
 module.exports = mongoose.model('user', UserSchema)

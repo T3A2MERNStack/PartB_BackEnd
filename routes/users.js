@@ -19,13 +19,13 @@ router.get('/login', (req, res) =>{
 router.post('/login', function(req, res, next){
     passport.authenticate('local', function(err, user){
         if(err){
-            throw err
+            res.status(401).send({name: "Incorrect Credentials", message: "The details you have entered are not correct"})
         }
         if (! user) {
-            res.status(401).send({name: "Incorrect Credentials", message: "The details you have entered are not correct"})
+            res.status(404).send({name: "Incorrect Credentials", message: "The details you have entered are not correct"})
         } else {
             req.login(user , err => {
-                if (err) throw err
+                // if (err) throw err
                 res.send(user)
             })
         }
