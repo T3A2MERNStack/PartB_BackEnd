@@ -22,7 +22,7 @@ const RecipesSchema = new mongoose.Schema({
           unitName: String },
         unit: {
           amountUnit: String,  
-          enum: ['tsp', 'tbl', 'cup(s)', 'ml', 'L', 'g', 'unit'], 
+          enum: ['tsp', 'tbl', 'cup(s)', 'drop(s)', 'ml', 'L', 'g', 'unit'], 
         }
      }],
     instructions: [
