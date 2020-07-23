@@ -18,6 +18,8 @@
     "express": "~4.16.1",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.1",
+    "global": "^4.4.0",
+    "heroku-dotenv": "^0.4.1",
     "mocha": "^8.0.1",
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.24",
