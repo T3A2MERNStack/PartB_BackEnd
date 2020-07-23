@@ -13,20 +13,21 @@ const RecipesSchema = new mongoose.Schema({
       required: false,
       validate(value) {
         if (value < 0) throw new Error("Prep Time must be greater than 0");
-      }
     },
     ingredients: [
       {
-        ingredientName: {type: String, required: false},
-        amount: [{
-          ingredientAmount: String,
-          unitName: String
-        }]
-     }
-    ],
+        ingredientName: {type: [String], required: true},
+        amount: {
+          ingredientAmount: [String],
+          unitName: String },
+        unit: {
+          amountUnit: String,  
+          enum: ['tsp', 'tbl', 'cup(s)', 'ml', 'L', 'g'], 
+        }
+     }],
     instructions: [
         {
-          type: String,
+          type: [String],
           required: true
         }
     ],
@@ -39,7 +40,9 @@ const RecipesSchema = new mongoose.Schema({
         {type: String}
     ],
     rating: {
-      type: Number
+      type: Number,
+      userID: String,
+      required: false
     },
     comments: {
       comment: {

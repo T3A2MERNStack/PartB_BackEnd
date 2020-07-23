@@ -1,57 +1,24 @@
 const mongoose = require('mongoose')
+const recipeModel = require('../recipe')
 
-const RecipesSchema = new mongoose.Schema({
-    productName: {
-      type: String,
-      required: true
-    },
-    productSummary:{
-      type: String
-    },
-    prepTime: {
-      type: Number,
-      required: false,
-      validate(value) {
-        if (value < 0) throw new Error("Prep Time must be greater than 0");
-      }
-    },
-    ingredients: [
-      {
-        ingredientName: {type: String, required: false},
-        amount: [{
-          ingredientAmount: String,
-          enum: ['tsp', 'tbl', 'cup', 'ml', 'L', 'g'],
-          unitName: String
-        }]
-     }
-    ],
-    instructions: [
-        {
-          type: String,
-          required: true
-        }
-    ],
-    category: {
-      type: String,
-      required: true
-    },
-    tags: [
-        {type: String}
-    ],
-    rating: {
-      type: Number,
-      userId: String,
-      required: false
-    },
-    comments: {
-      comment: {
-        recipeID: String,
-        userId: String,
-        commentBody: String,
-        date: Date
-      }
-    }  
-})
+
+const recipeed = [ new recipeModel({
+    productName: "Coffee Exfoliator",
+    productSummary: "...",
+    prepTime: 5,
+    ingredients: [{
+        ingredientName: ['Discarded coffee grounds', 'Coconut Oil'],
+        amount: [1, 1/4],
+        unit:  ["cup(s)", "cup(s)"]
+    }],
+    instructions: ["combine coffee grounds and coconut oil in a large bowl", "stir to combine", "store in a steralised jar for up to 3months"],
+    category: "Skincare",
+    tags: "not sure",
+    rating: 5,
+    comments: null,
+
+    
+})]
 
  
 module.exports = mongoose.model("recipe", RecipesSchema)
