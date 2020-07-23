@@ -19,6 +19,12 @@ const indexRouter = require('./routes/index');
 const listsRouter = require('./routes/lists');
 const usersRouter = require('./routes/users');
 
+const aws = require('aws-sdk');
+
+let s3 = new aws.S3({
+  access_key_id: process.env.MONGOID,
+  secret_access_key: process.env.SECRET
+});
 
 const app = express();
 
