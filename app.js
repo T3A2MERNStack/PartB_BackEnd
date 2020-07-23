@@ -16,7 +16,7 @@ const User = require('./models/user')
 
 require('./passport-config')
 const indexRouter = require('./routes/index');
-const listsRouter = require('./routes/lists');
+const recipesRouter = require('./routes/recipes');
 const usersRouter = require('./routes/users');
 
 const aws = require('aws-sdk');
@@ -78,7 +78,7 @@ app.use(passport.session())
 
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
-app.use('/lists', listsRouter);
+app.use('/recipes', recipesRouter);
 
 
 
