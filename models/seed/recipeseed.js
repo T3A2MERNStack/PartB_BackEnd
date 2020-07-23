@@ -38,7 +38,7 @@ new recipeModel({
     prepTime: 15,
     ingredients: [{
         ingredientName: ['Narrow neck glass bottle', 'Reeds', 'Favourite Essential Oil', 'Apricot Kernel Oil', 'light flavoured spirit (vodka)'],
-        amount: [1, 10, 20, 1/4],
+        amount: [1, 10, 20, 1/4, 2],
         unit:  ['unit', 'unit', 'drop', 'cup', 'tb' ]
     }],
     instructions: ['In a measuring cup with a pouring spout mix together kernal oil and spirit', 'use either a metal spoon or reed to combine the first two ingredients', 'stir in essential oil until well combined', 'pour mixture into bottle', 'add in reeds', 'rotate reeds weekly' ],
@@ -47,6 +47,21 @@ new recipeModel({
     rating: 3,
     comments: 'reeds can be bought on amazon and other online stores', 
 }), 
+new recipeModel({
+    productName: 'Body Butter',
+    productSummary: 'Thick homemade moisturiser to keep you feeling soft',
+    prepTime: 15,
+    ingredients: [{
+        ingredientName: ['Cocoa butter buttons', 'Shea Butter', 'Coconut Oil', 'Olive oil'],
+        amount: [1, 1, 1, 1],
+        unit:  ['cup', 'cup', 'cup', 'cup' ]
+    }],
+    instructions: ['set aadd all ingredients into a saucepan ', 'stir on low heat until all ingredients are melted', 'remove from heat and set aside in fridge until firm (about one hour)', 'remove from fridge and mix with electric hand mixer until thick and creamy', 'transfer mixture into sterilised jars'],
+    category: "Skincare",
+    tags: "not sure",
+    rating: 4,
+    comments: 'shea butter, coconut oil and cocoa butter buttons can all be found on amazon or other online retailers.', 
+})
 ]
 
  

@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 const {ensureAuthenticated } = require('../config/auth')
 
-
 router.get('/me', (req, res) =>{
     console.log(req.user)
     res.send(req.user)
@@ -14,7 +13,6 @@ router.get('/me', (req, res) =>{
 router.get('/login', (req, res) =>{
     res.send(200)
 })
-
 
 router.post('/login', function(req, res, next){
     passport.authenticate('local', function(err, user){

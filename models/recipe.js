@@ -49,7 +49,7 @@ const RecipesSchema = new mongoose.Schema({
         recipeID: String,
         userId: String,
         commentBody: String,
-        date: Date
+        default: Date.now
       }
     }  
 })
