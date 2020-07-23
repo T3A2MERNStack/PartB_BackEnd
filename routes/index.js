@@ -7,12 +7,6 @@ const RecipeModel = require('../models/recipe')
 /* GET home page. */
 router.get('/', (req, res) => {
   res.status(200).send("<h1>works</h1>")
-  // RecipeModel.create({
-  //     name: "cheese cake",
-  //     duration: "34"
-  // })
-  // .then(doc => res.status(200).send("<h1>works</h1>"))
-  // .catch(err => res.status(400).send("<h1>Error</h1>"))
   console.log("hello world2")
 });
 
