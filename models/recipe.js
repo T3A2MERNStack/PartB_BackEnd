@@ -18,10 +18,10 @@ const RecipesSchema = new mongoose.Schema({
     ingredients: [
       {
         ingredientName: {type: String, required: false},
-        amount: [{
+        amount: {
           ingredientAmount: String,
           unitName: String
-        }]
+        }
      }
     ],
     instructions: [
@@ -36,18 +36,7 @@ const RecipesSchema = new mongoose.Schema({
     },
     tags: [
         {type: String}
-    ],
-    rating: {
-      type: Number
-    },
-    comments: {
-      comment: {
-        recipeID: String,
-        userId: String,
-        commentBody: String,
-        date: Date
-      }
-    }  
+    ]
 })
 
  
