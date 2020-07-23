@@ -22,7 +22,7 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
-const db = "mongodb+srv://team-girls:ETsiWzgdCynyWMzZ@cluster0.zfqjd.mongodb.net/eco-recipe?retryWrites=true&w=majority"
+const db = process.env.MONGOID
 
 mongoose.connect(
   db,
