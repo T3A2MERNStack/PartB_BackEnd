@@ -32,7 +32,6 @@ const RecipesSchema = new mongoose.Schema({
     ],
     category: {
       type: String,
-      enum: ['Skincare', 'Home Care', 'Personal Care', 'Cleaning'],
       required: true
     },
     tags: [
