@@ -30,8 +30,24 @@ new recipeModel({
     category: "Cleaning",
     tags: "not sure",
     rating: 5,
-    comments: null,  
+    comments: null, 
+}),
+new recipeModel({
+    productName: 'Diffuser',
+    productSummary: 'natural diffuser',
+    prepTime: 15,
+    ingredients: [{
+        ingredientName: ['Narrow neck glass bottle', 'Reeds', 'Favourite Essential Oil', 'Apricot Kernel Oil', 'light flavoured spirit (vodka)'],
+        amount: [1, 10, 20, 1/4],
+        unit:  ['unit', 'unit', 'drop', 'cup', 'tb' ]
+    }],
+    instructions: ['In a measuring cup with a pouring spout mix together kernal oil and spirit', 'use either a metal spoon or reed to combine the first two ingredients', 'stir in essential oil until well combined', 'pour mixture into bottle', 'add in reeds', 'rotate reeds weekly' ],
+    category: "Home Care",
+    tags: "not sure",
+    rating: 3,
+    comments: 'reeds can be bought on amazon and other online stores', 
+}), 
 ]
 
  
-module.exports = mongoose.model("recipe", RecipesSchema)
+module.exports = mongoose.model("recipeseed", recipeed)
