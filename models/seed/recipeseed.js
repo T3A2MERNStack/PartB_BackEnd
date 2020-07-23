@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const recipeModel = require('../recipe')
 
+recipeModel.collection.drop()
 
 const recipeed = [ new recipeModel({
     productName: 'Coffee Exfoliator',
