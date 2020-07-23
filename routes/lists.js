@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const RecipeModel = require('./recipes')
+const RecipeModel = require('../models/recipe')
 const { route } = require('.')
 const { ensureAuthenticated } = require('../config/auth')
 

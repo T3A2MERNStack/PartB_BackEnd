@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose')
-const RecipeModel = require('./recipes')
+const RecipeModel = require('../models/recipe')
 
 
 /* GET home page. */
