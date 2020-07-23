@@ -65,7 +65,7 @@ app.use(session({
   store: new MongoStore({mongooseConnection: mongoose.connection})
 }))
     
-app.use(cookieParser('password'))
+app.use(cookieParser(`${process.env.SECRET}`))
 
 app.use(passport.initialize())
 app.use(passport.session())
