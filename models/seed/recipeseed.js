@@ -20,6 +20,7 @@ const RecipesSchema = new mongoose.Schema({
         ingredientName: {type: String, required: false},
         amount: [{
           ingredientAmount: String,
+          enum: ['tsp', 'tbl', 'cup', 'ml', 'L', 'g'],
           unitName: String
         }]
      }
@@ -38,7 +39,9 @@ const RecipesSchema = new mongoose.Schema({
         {type: String}
     ],
     rating: {
-      type: Number
+      type: Number,
+      userId: String,
+      required: false
     },
     comments: {
       comment: {
