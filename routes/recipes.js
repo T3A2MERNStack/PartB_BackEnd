@@ -13,9 +13,13 @@ router.get('/lists', function(req, res, next) {
 
 router.post('/new', async (req, res) => {
   // console.log(req.body)
+  // res.send(req.body)
   const recipe = new RecipeModel(req.body)
   try {
-    await recipe.save();
+    await recipe.save(function (err) {
+      if(err) console.log(err)
+    });
+    console.log(recipe)
     res.send(recipe);
   } catch (err) {
     res.status(404).send(err);
