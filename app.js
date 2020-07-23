@@ -22,7 +22,7 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
-const db = parse(process.env.MONGOID)
+const db = `${process.env.MONGOID}`
 
 mongoose.connect(
   db,
@@ -58,7 +58,7 @@ app.use(cors(
 // app.user((res,req)
 
 app.use(session({
-  secret: parse(process.env.SECRET),
+  secret: `${process.env.SECRET}`,
   resave: false,
   saveUninitialized: false,
   // new MongoStore needs a connection, we have an existing connection so we re-use that
