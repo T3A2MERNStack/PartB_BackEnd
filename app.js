@@ -22,7 +22,7 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
-const db = require('./config/keys').MongoId
+const db = process.env.MONGOID
 
 mongoose.connect(
   db,
@@ -57,25 +57,20 @@ app.use(cors(
 // app.use(express.static(path.join(__dirname, 'public')));
 // app.user((res,req)
 
-function cookieChecker(req, res, next){
-  console.log(req.cookie)
-  next()
-}
-
 app.use(session({
-  secret: "secret",
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: false,
   // new MongoStore needs a connection, we have an existing connection so we re-use that
   store: new MongoStore({mongooseConnection: mongoose.connection})
 }))
     
-app.use(cookieParser("secret"))
+app.use(cookieParser(process.env.SECRET))
 
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/users', cookieChecker, usersRouter);
+app.use('/users', usersRouter);
 app.use('/', indexRouter);
 app.use('/lists', listsRouter);
 
