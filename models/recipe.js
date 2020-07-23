@@ -12,7 +12,7 @@ const RecipesSchema = new mongoose.Schema({
       type: Number,
       required: false,
       validate(value) {
-        if (value < 0) throw new Error("Negative calories aren't real.");
+        if (value < 0) throw new Error("Prep Time must be greater than 0");
       }
     },
     ingredients: [
