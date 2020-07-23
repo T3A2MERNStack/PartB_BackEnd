@@ -46,12 +46,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors(
-//   {
-//   // people coming from "http://localhost:3000"
-//   origin: "http://localhost:3000",
-//   // allow client to send credentials like cookies and headers
-//   credentials: true
-// }
+  {
+  // people coming from "http://localhost:3000"
+  origin: "http://localhost:3000",
+  // allow client to send credentials like cookies and headers
+  credentials: true
+}
 ))
 
 // app.use(express.static(path.join(__dirname, 'public')));
