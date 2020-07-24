@@ -29,13 +29,6 @@ router.post('/login', function(req, res, next){
                 res.send(user)
             })
         }
-        // req.login(user, function(err){`as
-        //     if(err){
-        //       return next(err);
-        //     }
-        //     // console.log(req.session.passport.user)
-        //     return res.send({ success : true, message : 'authentication succeeded', user: user});        
-        // });
     })(req, res, next)
 })
 
