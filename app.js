@@ -21,10 +21,10 @@ const usersRouter = require('./routes/users');
 
 const aws = require('aws-sdk');
 
-let s3 = new aws.S3({
-  access_key_id: process.env.MONGOID,
-  secret_access_key: process.env.SECRET
-});
+// let s3 = new aws.S3({
+//   access_key_id: process.env.MONGOID,
+//   secret_access_key: process.env.SECRET
+// });
 
 const app = express();
 
@@ -56,7 +56,7 @@ app.use(cors(
   // people coming from "http://localhost:3000"
   origin: "http://localhost:3000",
   // allow client to send credentials like cookies and headers
-  credentials: true
+  credentials: true,
 }
 ))
 

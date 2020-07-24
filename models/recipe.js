@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const RecipesSchema = new mongoose.Schema({
+    publicId: {
+      type: String,
+      required: true
+    },
     productName: {
       type: String,
       required: true
@@ -11,15 +15,19 @@ const RecipesSchema = new mongoose.Schema({
     prepTime: {
       type: Number,
       required: false,
-      validate(value) {
-        if (value < 0) throw new Error("Prep Time must be greater than 0");
+      // validate(value) {
+      //   if (value < 0) {
+      //     throw new Error("Prep Time must be greater than 0")
+      //   }
+      // }
     },
     ingredients: [
       {
         ingredientName: {type: [String], required: true},
         amount: {
           ingredientAmount: [String],
-          unitName: String },
+          unitName: String
+        },
         unit: {
           amountUnit: String,  
           enum: ['tsp', 'tbl', 'cup(s)', 'drop(s)', 'ml', 'L', 'g', 'unit'], 
@@ -49,7 +57,8 @@ const RecipesSchema = new mongoose.Schema({
         recipeID: String,
         userId: String,
         commentBody: String,
-        default: Date.now
+        // default: Date.now()
+        // default: new Date
       }
     }  
 })
