@@ -1,14 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var cloudinary = require('cloudinary').v2
 const RecipeModel = require('../models/recipe')
 const { route } = require('.')
-
-cloudinary.config({
-  cloud_name: 'highpitchit',
-  api_key: '757644134999622',
-  api_secret: 'BPVWAR1wVeDL3g69WOEmxAOKhTI'
-  });
 
 /* GET users listing. */
 router.get('/lists', function(req, res, next) {
@@ -19,22 +12,15 @@ router.get('/lists', function(req, res, next) {
 });
 
 router.post('/new', (req, res) => {
-  // console.log(req.body)
-  // const recipe = new RecipeModel(req.body)
   const recipeData = req.body.recipe
-  const image = req.body.image
-  console.log(recipeData)
-  // delete recipeData.image
-  console.log(image)
+
     RecipeModel.create(recipeData)
-    .then((rdoc) => cloudinary.uploader.upload("my_picture.jpg", function(error, result) { console.log(result) }))
-    .catch(err => res.status(404).send(err))
-  // try {
-  //   await recipe.save();
-  //   res.send(recipe);
-  // } catch (err) {
-  //   res.status(404).send(err);
-  // }
+    .then(doc => {
+      res.status(200).send({publicId: doc._id })}
+      )
+    .catch(err => {
+      res.status(404).send(err)}
+      )
 })
 
 router.patch('/edit/:id', async (req, res) => {
