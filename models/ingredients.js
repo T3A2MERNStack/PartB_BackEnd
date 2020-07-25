@@ -7,4 +7,5 @@ const IngredientSchema = new mongoose.Schema({
         unit: { type: [String], required: true }
         })
 
-        module.exports = mongoose.model("ingredient", IngredientSchema)
+const Ingredient = mongoose.model("Ingredient", IngredientSchema)
+module.exports = Ingredient

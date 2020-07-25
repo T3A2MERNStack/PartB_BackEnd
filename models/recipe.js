@@ -1,11 +1,6 @@
 const mongoose = require('mongoose')
 
- const RecipesSchema = new mongoose.Schema({
-// const RecipesSchema = new mongoose.Schema({
-//   publicId: {
-//     type: String,
-//     required: true
-//   },
+const RecipesSchema = new mongoose.Schema({
   productName: {
     type: String,
     required: true
@@ -17,16 +12,16 @@ const mongoose = require('mongoose')
     type: Number,
     required: false,
   },
-  
-  instructions: [
-    {
+  ingredients: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Ingredient'
+  },
+  instructions: {
       type: [String],
       required: true
-    }
-  ],
+  },
   category: {
-    type: String,
-    //enum: ['Skincare', 'Home Care', 'Personal Care', 'Cleaning'],
+    type: [String],
     required: true
   },
   tags: [
