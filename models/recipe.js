@@ -33,13 +33,8 @@ const RecipesSchema = new mongoose.Schema({
     required: false
   },
   comments: {
-    comment: {
-      recipeID: String,
-      userId: String,
-      commentBody: String,
-      // default: Date.now()
-      // default: new Date
-    }
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment'
   }  
 })
 
