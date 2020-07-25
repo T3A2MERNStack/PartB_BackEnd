@@ -1,14 +1,10 @@
 
 const mongoose = require('mongoose')
 
-const RecipesSchema = new mongoose.Schema({
-        ingredientName: { type: [String], required: true },
-        amount: {
-            ingredientAmount: [String],
-            unitName: String
-        },
-        unit: {
-            amountUnit: String,
-            enum: ['tsp', 'tbl', 'cup(s)', 'drop(s)', 'ml', 'L', 'g', 'unit'],
-        }
-        }
+const IngredientSchema = new mongoose.Schema({
+        name: { type: [String], required: true },
+        amount: { type: [Number], required: true },
+        unit: { type: [String], required: true }
+        })
+
+        module.exports = mongoose.model("ingredient", IngredientSchema)
