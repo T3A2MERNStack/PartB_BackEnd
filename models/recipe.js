@@ -16,24 +16,8 @@ const mongoose = require('mongoose')
   prepTime: {
     type: Number,
     required: false,
-    // validate(value) {
-    //   if (value < 0) {
-    //     throw new Error("Prep Time must be greater than 0")
-    //   }
-    // }
   },
-  ingredients: [
-    {
-      ingredientName: { type: [String], required: true },
-      amount: {
-        ingredientAmount: [String],
-        unitName: String
-      },
-      unit: {
-        amountUnit: String,
-        enum: ['tsp', 'tbl', 'cup(s)', 'drop(s)', 'ml', 'L', 'g', 'unit'],
-      }
-    }],
+  
   instructions: [
     {
       type: [String],
