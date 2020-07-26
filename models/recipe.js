@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const RecipesSchema = new mongoose.Schema({
+ const RecipesSchema = new mongoose.Schema({
   productName: {
     type: String,
     required: true
@@ -35,8 +35,11 @@ const RecipesSchema = new mongoose.Schema({
     required: false
   },
   comments: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Comment'
+    comment: {
+      recipeID: String,
+      userId: String,
+      commentBody: String,
+    }
   }  
 })
 
