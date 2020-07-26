@@ -12,21 +12,23 @@ const RecipesSchema = new mongoose.Schema({
     type: Number,
     required: false,
   },
-  ingredients: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Ingredient'
-  },
-  instructions: {
-      type: [String],
-      required: true
-  },
+  ingredients: [
+    {
+    name: { type: String },
+    amount: { type: Number },
+    unit: { type: String}
+    }
+  ]
+  ,
+  steps: [ {type: String, required: true} ],
   category: {
-    type: [String],
+    type: String,
     required: true
   },
-  tags: { 
-    type: String 
-  },
+  tags: [
+    {type: String}
+  ] 
+  ,
   rating: {
     type: Number,
     userID: String,

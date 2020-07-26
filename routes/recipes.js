@@ -13,12 +13,14 @@ router.get('/lists', function(req, res, next) {
 
 router.post('/new', (req, res) => {
   const recipeData = req.body.recipe
-
+  console.log(req.body.recipe)
     RecipeModel.create(recipeData)
     .then(doc => {
+      console.log(doc)
       res.status(200).send({publicId: doc._id })}
       )
     .catch(err => {
+      console.log(err)
       res.status(404).send(err)}
       )
 })
