@@ -21,7 +21,7 @@ const mongoose = require('mongoose')
       },
       unit: {
         amountUnit: String,
-        required: true
+        
         //enum: ['tsp', 'tbl', 'cup(s)', 'drop(s)', 'ml', 'L', 'g', 'unit'],
       }
     }],
