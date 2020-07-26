@@ -20,7 +20,7 @@ const mongoose = require('mongoose')
     }
   ]
   ,
-  steps: [ {type: String, required: true} ],
+  steps: [ {type: String} ],
   category: {
     type: String,
     required: true
