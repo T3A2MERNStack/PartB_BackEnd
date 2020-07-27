@@ -2,16 +2,19 @@ var express = require('express');
 var router = express.Router();
 const RecipeModel = require('../models/recipe')
 const { route } = require('.')
+const {isLoggedIn } = require('../config/authorisation')
 
 /* GET users listing. */
-router.get('/lists', function(req, res, next) {
+router.get('/lists', isLoggedIn, function(req, res, next) {
   // console.log(RecipeModel.find({"test": "test"}))
   RecipeModel.find({})
   .then(doc => res.status(200).send(doc))
   .catch(err => res.status(400).send("<h1>Error</h1>"))
 });
 
-router.post('/new', (req, res) => {
+router.get('/new', isLoggedIn)
+
+router.post('/new', isLoggedIn, (req, res) => {
   const recipeData = req.body.recipe
   console.log(req.body.recipe)
     RecipeModel.create(recipeData)
@@ -25,7 +28,8 @@ router.post('/new', (req, res) => {
       )
 })
 
-router.patch('/edit/:id', async (req, res) => {
+
+router.patch('/edit/:id', isLoggedIn, async (req, res) => {
   try {
     await RecipeModel.findByIdAndUpdate(req.params.id, req.body)
     await RecipeModel.save()

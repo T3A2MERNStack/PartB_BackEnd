@@ -3,7 +3,7 @@ module.exports = {
         if(req.isAuthenticated()){
             return next()
         } 
-        res.send(404)
+        else {res.status(404).send("Please log in to continue")}
     }
 
 }

@@ -20,6 +20,8 @@ const recipesRouter = require('./routes/recipes');
 const usersRouter = require('./routes/users');
 
 const aws = require('aws-sdk');
+const { ensureAuthenticated } = require('./config/auth')
+const { isLoggedIn } = require('./config/authorisation')
 
 // let s3 = new aws.S3({
 //   access_key_id: process.env.MONGOID,
@@ -79,7 +81,6 @@ app.use(passport.session())
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
 app.use('/recipes', recipesRouter);
-
 
 
 module.exports = app;
