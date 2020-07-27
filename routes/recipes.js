@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const RecipeModel = require('../models/recipe')
 const { route } = require('.')
+const { isLoggedIn } = require('./authorize')
 
 /* GET users listing. */
 router.get('/lists', function(req, res, next) {
@@ -19,7 +20,7 @@ router.get('/get/:id', function(req, res, next) {
 });
 
 
-router.post('/new', (req, res) => {
+router.post('/new', isLoggedIn, (req, res) => {
   const recipeData = req.body.recipe
   console.log(req.body.recipe)
     RecipeModel.create(recipeData)
