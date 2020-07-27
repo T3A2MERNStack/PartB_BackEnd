@@ -40,7 +40,8 @@ const mongoose = require('mongoose')
       userId: String,
       commentBody: String,
     }
-  }  
+  },
+  userId: {type: String, required: true}
 })
 
 
