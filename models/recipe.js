@@ -14,31 +14,21 @@ const mongoose = require('mongoose')
   },
   ingredients: [
     {
-      ingredientName: { type: [String], required: true },
-      amount: {
-        ingredientAmount: [String],
-        unitName: String
-      },
-      unit: {
-        amountUnit: String,
-        
-        //enum: ['tsp', 'tbl', 'cup(s)', 'drop(s)', 'ml', 'L', 'g', 'unit'],
-      }
-    }],
-  instructions: [
-    {
-      type: [String],
-      required: true
+    name: { type: String },
+    amount: { type: Number },
+    unit: { type: String}
     }
-  ],
+  ]
+  ,
+  steps: [ {type: String} ],
   category: {
     type: String,
-    //enum: ['Skincare', 'Home Care', 'Personal Care', 'Cleaning'],
     required: true
   },
   tags: [
-    { type: String }
-  ],
+    {type: String}
+  ] 
+  ,
   rating: {
     type: Number,
     userID: String,
