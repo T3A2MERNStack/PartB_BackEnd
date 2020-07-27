@@ -11,6 +11,14 @@ router.get('/lists', function(req, res, next) {
   .catch(err => res.status(400).send("<h1>Error</h1>"))
 });
 
+router.get('/get/:id', function(req, res, next) {
+  // console.log(RecipeModel.find({"test": "test"}))
+  RecipeModel.find({_id: req.params.id})
+    .then(doc => res.status(200).send(doc))
+    .catch(err => res.status(400).send("<h1>Error</h1>"))
+});
+
+
 router.post('/new', (req, res) => {
   const recipeData = req.body.recipe
   console.log(req.body.recipe)
