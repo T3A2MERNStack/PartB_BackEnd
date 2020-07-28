@@ -47,7 +47,7 @@ router.put('/edit/:id', (req, res) => {
   RecipeModel.findByIdAndUpdate(
     req.params.id,
     req.body.recipe,
-    { useFindAndModify: true },
+    { useFindAndModify: false },
     function(err, user){
       if(err){
           res.json({error :err}) ; 
