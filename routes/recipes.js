@@ -19,7 +19,6 @@ router.get('/get/:id', function(req, res, next) {
     .catch(err => res.status(400).send("<h1>Error</h1>"))
 });
 
-
 router.post('/new', isLoggedIn, (req, res) => {
   const recipeData = req.body.recipe
   console.log(req.body.recipe)
@@ -34,16 +33,23 @@ router.post('/new', isLoggedIn, (req, res) => {
       )
 })
 
-router.patch('/edit/:id', async (req, res) => {
-  try {
-    await RecipeModel.findByIdAndUpdate(req.params.id, req.body)
-    await RecipeModel.save()
-    res.send(food)
-  } catch (err) {
-    res.status(500).send(err)
-  }
+router.put('/edit/:id', (req, res) => {
+  // console.log('hit here ')
+  console.log(req.body)
+  // console.log(req.params.id)
+  RecipeModel.findByIdAndUpdate(
+    req.params.id,
+    req.body.recipe,
+    { useFindAndModify: true },
+    function(err, user){
+      if(err){
+          res.json({error :err}) ; 
+      } else{
+          console.log(user)
+          res.send(user) ; 
+      }
+  })
 })
-
 
 router.delete('/delete/:id', async (req, res) => {
   try{
