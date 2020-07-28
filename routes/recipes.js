@@ -18,6 +18,13 @@ router.get('/category/:id', async (req, res) =>{
   res.send(recipes)
 })
 
+router.get('/categoryc/:id', async (req, res) =>{
+  // console.log(req.params.id)
+  const recipes = await RecipeModel.find({category: "cleaning"})
+  // console.log(recipes)
+  res.send(recipes)
+})
+
 /* GET users listing. */
 router.get('/lists', function(req, res, next) {
   // console.log(RecipeModel.find({"test": "test"}))
