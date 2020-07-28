@@ -4,6 +4,13 @@ const RecipeModel = require('../models/recipe')
 const { route } = require('.')
 const { isLoggedIn } = require('./authorize')
 
+router.get('/me/:id', async (req, res) =>{
+  // console.log(req.params.id)
+  const recipes = await RecipeModel.find({userId: req.params.id})
+  // console.log(recipes)
+  res.send(recipes)
+})
+
 /* GET users listing. */
 router.get('/lists', function(req, res, next) {
   // console.log(RecipeModel.find({"test": "test"}))
