@@ -5,37 +5,12 @@ const { route } = require('.')
 const { isLoggedIn } = require('./authorize')
 
 router.get('/me/:id', async (req, res) =>{
-  // console.log(req.params.id)
   const recipes = await RecipeModel.find({userId: req.params.id})
-  // console.log(recipes)
   res.send(recipes)
 })
 
 router.get('/category/:id', async (req, res) =>{
-  // console.log(req.params.id)
-  const recipes = await RecipeModel.find({category: "skin"})
-  // console.log(recipes)
-  res.send(recipes)
-})
-
-router.get('/categoryc/:id', async (req, res) =>{
-  // console.log(req.params.id)
-  const recipes = await RecipeModel.find({category: "cleaning"})
-  // console.log(recipes)
-  res.send(recipes)
-})
-
-router.get('/categoryhc/:id', async (req, res) =>{
-  // console.log(req.params.id)
-  const recipes = await RecipeModel.find({category: "home"})
-  // console.log(recipes)
-  res.send(recipes)
-})
-
-router.get('/categorypc/:id', async (req, res) =>{
-  // console.log(req.params.id)
-  const recipes = await RecipeModel.find({category: "personal"})
-  // console.log(recipes)
+  const recipes = await RecipeModel.find({category: req.params.id})
   res.send(recipes)
 })
 
