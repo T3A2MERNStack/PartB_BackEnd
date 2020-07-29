@@ -39,6 +39,13 @@ router.get('/categorypc/:id', async (req, res) =>{
   res.send(recipes)
 })
 
+router.get('/myrecipe/:id', async (req, res) =>{
+  // console.log(req.params.id)
+  const recipes = await RecipeModel.find({userId: req.params.id})
+  // console.log(recipes)
+  res.send(recipes)
+})
+
 /* GET users listing. */
 router.get('/lists', function(req, res, next) {
   // console.log(RecipeModel.find({"test": "test"}))
