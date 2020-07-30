@@ -53,7 +53,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors(
   {
-  // people coming from "http://localhost:3000"
+  // origin: "http://ecoa.space",
   origin: "http://localhost:3000",
   // allow client to send credentials like cookies and headers
   credentials: true,
